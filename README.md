@@ -67,7 +67,7 @@ X, A, B, C, D.
  	
 #### Блок-схема
 ```mermaid
- 	graph TD;
+graph TD;
     A([Начало]) --> B[/Ввод: X, A, B, C, D/];
     B --> C{X < A};
     C -- Да --> D[Вывод: 1];
@@ -77,12 +77,16 @@ X, A, B, C, D.
     G -- Да --> H[Вывод: 3];
     G -- Нет --> I{C < X < D};
     I -- Да --> J[Вывод: 4];
-    I -- Нет --> K[Вывод: 5];
-    D --> L([Конец]);
-    F --> L;
-    H --> L;
-    J --> L;
-    K --> L;
+    I -- Нет --> K{X > D};
+    K -- Да --> L[Вывод: 5];
+    K -- Нет --> M[Ошибка: Числа не соответствуют условиям];
+    D --> N([Конец]);
+    F --> N;
+    H --> N;
+    J --> N;
+    L --> N;
+    M --> N;
+
 
 
 ```
@@ -105,11 +109,11 @@ public class Main {
         // Логика проверки положения точки X
         if (X < A) {
             System.out.println(1); // Участок 1
-        } else if (X < B & X > A) {
+        } else if (X < B && X > A) {
             System.out.println(2); // Участок 2
-        } else if (X < C & X > B) {
+        } else if (X < C && X > B) {
             System.out.println(3); // Участок 3
-        } else if (X < D & X > C) {
+        } else if (X < D && X > C) {
             System.out.println(4); // Участок 4
         } else if (X > D) {
             System.out.println(5); // Участок 5
